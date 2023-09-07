@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PostKeeper</string>
+    <string name="app_center_id">915f3408-1a1d-4330-be5a-0dcce9f98f89</string>
+    <string name="news_api">https://newsapi.org/v2/</string>
 </resources>
