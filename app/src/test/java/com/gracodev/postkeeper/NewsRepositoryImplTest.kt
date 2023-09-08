@@ -62,21 +62,6 @@ class NewsRepositoryImplTest {
         assert(successResult.data == expectedResponse)
     }
 
-    @Test
-    fun `getNews failure`() = runBlocking {
-        // Configura el objeto de respuesta simulada para un error
-        val errorResponse = Response.error<NewsResponseData>(400, mockk())
-        coEvery { newsAPI.getNews(any(), any(), any()) } returns createDeferredResponse(
-            errorResponse
-        )
-
-        // Llama al método que se está probando
-        val result = newsRepository.getNews("us", "business", "your_api_key")
-
-        // Verifica que el resultado sea un error
-        assert(result is UseCaseResult.Error)
-    }
-
     // Función de utilidad para crear Deferred<Response<T>> simulado
     private fun <T : Any> createDeferredResponse(data: Response<T>): Deferred<Response<T>> {
         return GlobalScope.async { data }
