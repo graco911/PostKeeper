@@ -1,6 +1,7 @@
 package com.gracodev.postkeeper.data.modules
 
 import android.content.Context
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.GsonBuilder
 import com.gracodev.postkeeper.R
 import com.gracodev.postkeeper.data.factories.BlogViewModelFactory
@@ -34,7 +35,7 @@ fun createAppModules(): Module = module {
             baseUrl = androidContext().getString(R.string.news_api)
         )
     }
-
+    single { FirebaseFirestore.getInstance() }
     single<NewsRepository> { NewsRepositoryImpl(get()) }
     single<BlogFirestoreRepository> { BlogFirestoreRepositoryImpl(get()) }
 

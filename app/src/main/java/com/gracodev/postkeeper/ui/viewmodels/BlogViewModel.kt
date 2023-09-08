@@ -24,12 +24,25 @@ class BlogViewModel(private val repository: BlogFirestoreRepository) : BaseViewM
     private val _deletePostResultLiveData = MutableLiveData<UIStates<Unit>>()
     val deletePostResultLiveData: LiveData<UIStates<Unit>> = _deletePostResultLiveData
 
+    private val _enabledButton =
+        MutableLiveData<Boolean>().apply { value = false }
+    val enabledButton: LiveData<Boolean> get() = _enabledButton
+
+    private val _blogPostData = MutableLiveData<BlogPostData>().apply {
+        value = BlogPostData("", "", 0, "")
+    }
+    val blogPostData: LiveData<BlogPostData> = _blogPostData
+
+    private val _textChanged = MutableLiveData<Unit>()
+    val textChanged: LiveData<Unit> = _textChanged
+
     // Función para agregar una nueva entrada de blog
-    fun addBlogPost(blogPost: BlogPostData) {
+    fun addBlogPost() {
+        _blogPostData.value?.timeStamp = System.currentTimeMillis()
         _addPostResultLiveData.value = UIStates.Loading
         viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.addPost(blogPost)
-            _addPostResultLiveData.postValue(result.toUIStates())
+            val result = blogPostData.value?.let { repository.addPost(it) }
+            _addPostResultLiveData.postValue(result?.toUIStates())
         }
     }
 
@@ -43,20 +56,32 @@ class BlogViewModel(private val repository: BlogFirestoreRepository) : BaseViewM
     }
 
     // Función para actualizar una entrada de blog existente
-    fun updateBlogPost(blogPost: BlogPostData) {
+    fun updateBlogPost() {
         _updatePostResultLiveData.value = UIStates.Loading
         viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.updatePost(blogPost)
-            _updatePostResultLiveData.postValue(result.toUIStates())
+            val result = blogPostData.value?.let { repository.updatePost(it) }
+            _updatePostResultLiveData.postValue(result?.toUIStates())
         }
     }
 
     // Función para eliminar una entrada de blog por su ID
-    fun deleteBlogPost(postId: String) {
+    fun deleteBlogPost() {
         _deletePostResultLiveData.value = UIStates.Loading
         viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.deletePost(postId)
-            _deletePostResultLiveData.postValue(result.toUIStates())
+            val result = blogPostData.value?.id?.let { repository.deletePost(it) }
+            _deletePostResultLiveData.postValue(result?.toUIStates())
         }
+    }
+
+    fun enableSaveButton(isVisible: Boolean) {
+        _enabledButton.value = isVisible
+    }
+
+    fun setBlogPostData(blogPostData: BlogPostData) {
+        this._blogPostData.value = blogPostData
+    }
+
+    fun notifyTextChanged() {
+        _textChanged.value = Unit
     }
 }

@@ -1,7 +1,6 @@
 package com.gracodev.postkeeper
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.google.firebase.firestore.FirebaseFirestore
 import com.gracodev.postkeeper.data.models.BlogPostData
 import com.gracodev.postkeeper.data.repositories.BlogFirestoreRepository
@@ -20,8 +19,6 @@ class BlogFirestoreRepositoryImplInstrumentedTest {
 
     @Before
     fun setUp() {
-        // Obtén el contexto de la aplicación instrumentada
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
         firestore = FirebaseFirestore.getInstance()
 
         repository = BlogFirestoreRepositoryImpl(firestore)
@@ -31,10 +28,10 @@ class BlogFirestoreRepositoryImplInstrumentedTest {
     fun addPost_shouldReturnUseCaseResultSuccess() = runBlocking {
         // Arrange: Crea un objeto BlogPostData para agregar
         val blogPost = BlogPostData(
-            title = "Título de la publicación",
-            author = "Autor de la publicación",
+            title = "Hola Mundo",
+            author = "Carlos Graniel",
             timeStamp = System.currentTimeMillis(),
-            body = "Contenido de la publicación",
+            body = "Esta es una publicación que estoy creando desde una prueba instrumentada en Android. Esta prueba carga un registro directamente en Firestore y sirve como demostración del correcto funcionamiento de la aplicación conectada a Firebase.",
             id = ""
         )
 
