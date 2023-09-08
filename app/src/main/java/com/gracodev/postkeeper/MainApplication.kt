@@ -1,6 +1,7 @@
 package com.gracodev.postkeeper
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.gracodev.postkeeper.Utils.Prefs
 import com.gracodev.postkeeper.data.modules.createAppModules
 import com.microsoft.appcenter.AppCenter
@@ -13,6 +14,8 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        FirebaseApp.initializeApp(this)
 
         val appModules = createAppModules()
 

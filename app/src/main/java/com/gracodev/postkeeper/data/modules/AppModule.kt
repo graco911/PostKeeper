@@ -3,11 +3,15 @@ package com.gracodev.postkeeper.data.modules
 import android.content.Context
 import com.google.gson.GsonBuilder
 import com.gracodev.postkeeper.R
+import com.gracodev.postkeeper.data.factories.BlogViewModelFactory
 import com.gracodev.postkeeper.data.factories.NewsViewModelFactory
 import com.gracodev.postkeeper.data.interfaces.NewsAPI
+import com.gracodev.postkeeper.data.repositories.BlogFirestoreRepository
+import com.gracodev.postkeeper.data.repositories.BlogFirestoreRepositoryImpl
 import com.gracodev.postkeeper.data.repositories.NewsRepository
 import com.gracodev.postkeeper.data.repositories.NewsRepositoryImpl
 import com.gracodev.postkeeper.interceptors.NetworkConnectionInterceptor
+import com.gracodev.postkeeper.ui.viewmodels.BlogViewModel
 import com.gracodev.postkeeper.ui.viewmodels.NewsViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -30,9 +34,15 @@ fun createAppModules(): Module = module {
             baseUrl = androidContext().getString(R.string.news_api)
         )
     }
+
     single<NewsRepository> { NewsRepositoryImpl(get()) }
+    single<BlogFirestoreRepository> { BlogFirestoreRepositoryImpl(get()) }
+
     factory { NewsViewModelFactory(get()) }
+    factory { BlogViewModelFactory(get()) }
+
     viewModel { NewsViewModel(get()) }
+    viewModel { BlogViewModel(get()) }
 }
 
 fun createHttpClient(context: Context): OkHttpClient {
