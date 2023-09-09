@@ -21,22 +21,20 @@ Las principales características de la estructura del proyecto incluyen:
 
 El diagrama de la arquitectura muestra tanto las activities como los fragments enlazados a sus respectivos viewmodels los cuales usan los repositorios conectados a los servicios de datos tanto Firestore como NewsAPI.
 
-<img src="https://github.com/graco911/PostKeeper/assets/4141290/5695029f-9207-429e-87b9-b7d495d5d7e4" alt="Descripción de la imagen" width="50%" height="50%" />
-
 ## Aplicacion movil
 
 PostKeeper consta de una pantalla principal con un BottomNavigationView que permite navegar entre la vista del listado de entradas y la vista de Noticias. También incluye un FloatingActionButton que muestra la pantalla para ingresar una nueva entrada y una vista para realizar búsquedas.
 
-<img src="https://github.com/graco911/PostKeeper/assets/4141290/dfddadda-24cf-4bd3-8e50-7ed7049c65d4" alt="Descripción de la imagen" width="20%" height="20%" />
-<img src="https://github.com/graco911/PostKeeper/assets/4141290/4a90582e-42d5-48a5-8488-94840d9c262e" alt="Descripción de la imagen" width="20%" height="20%" />
+<img src="https://github.com/graco911/PostKeeper/assets/4141290/b1f6ed0a-649f-4133-aa1e-4c815a86edbd" alt="Descripción de la imagen" width="20%" height="20%" />
+<img src="https://github.com/graco911/PostKeeper/assets/4141290/c783858d-f35e-4534-9668-923a9f2bfaba" alt="Descripción de la imagen" width="20%" height="20%" />
 
 La aplicación incluye una validación que muestra u oculta la opción de ingresar nuevas entradas teniendo en cuenta si el dispositivo tiene o no conexión a Internet.
 
-<img src="https://github.com/graco911/PostKeeper/assets/4141290/79012ebc-0ab1-4e9a-9d55-6c81e2dfd3b5" alt="Descripción de la imagen" width="20%" height="20%" />
+<img src="https://github.com/graco911/PostKeeper/assets/4141290/71947aea-385c-412c-8f0c-a2c6a788c134" alt="Descripción de la imagen" width="20%" height="20%" />
 
 El SearchView permite realizar búsquedas utilizando Android ChipView como filtros.
 
-<img src="https://github.com/graco911/PostKeeper/assets/4141290/09b2257c-7f5e-43d4-b247-56369b86c58e" alt="Descripción de la imagen" width="20%" height="20%" />
+<img src="https://github.com/graco911/PostKeeper/assets/4141290/d613055e-215f-4c12-88ef-d678c706f67c" alt="Descripción de la imagen" width="20%" height="20%" />
 
 ```kotlin
 private fun filterEntries(searchText: String, selectedChips: Set<Int>) {
@@ -49,7 +47,8 @@ private fun filterEntries(searchText: String, selectedChips: Set<Int>) {
 
             val propertyToFilter: String = when {
                 shouldSearchInAllProperties -> "${entry.title} ${entry.author} ${entry.body}"
-                R.id.chipOption1 in selectedChips -> entry.title
+                R.id.chipOption1 in selectedChips -> entry.title![Screenshot_20230909_024554](https://github.com/graco911/PostKeeper/assets/4141290/0dcf580e-a162-486a-abe8-16395377a108)
+
                 R.id.chipOption2 in selectedChips -> entry.author
                 R.id.chipOption3 in selectedChips -> entry.body
                 else -> ""
