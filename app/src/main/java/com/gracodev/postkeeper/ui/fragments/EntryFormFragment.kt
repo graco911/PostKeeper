@@ -94,7 +94,7 @@ class EntryFormFragment : BaseFragment() {
 
     private fun viewModelInitialData() {
         // Unicamente para pruebas.
-        viewModel.setBlogPostData(
+        /*viewModel.setBlogPostData(
             BlogPostData(
                 "Hola Mundo desde Android",
                 "Carlos",
@@ -102,7 +102,7 @@ class EntryFormFragment : BaseFragment() {
                 "Esta entrada esta hecha desde el dispositivo android para probar el correcto funcionamiento de la aplicacion en un dispositivo.",
                 ""
             )
-        )
+        )*/
     }
 
     private fun setUpOnClickListeners() {

@@ -30,5 +30,6 @@ class MainApplication : Application() {
         )
 
         Prefs.init(this)
+
     }
 }

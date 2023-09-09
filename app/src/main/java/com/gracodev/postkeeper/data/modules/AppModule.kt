@@ -4,11 +4,13 @@ import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.GsonBuilder
 import com.gracodev.postkeeper.R
+import com.gracodev.postkeeper.data.database.AppDatabase
 import com.gracodev.postkeeper.data.factories.BlogViewModelFactory
 import com.gracodev.postkeeper.data.factories.NewsViewModelFactory
 import com.gracodev.postkeeper.data.interfaces.NewsAPI
 import com.gracodev.postkeeper.data.repositories.BlogFirestoreRepository
 import com.gracodev.postkeeper.data.repositories.BlogFirestoreRepositoryImpl
+import com.gracodev.postkeeper.data.repositories.BlogRoomRepositoryImpl
 import com.gracodev.postkeeper.data.repositories.NewsRepository
 import com.gracodev.postkeeper.data.repositories.NewsRepositoryImpl
 import com.gracodev.postkeeper.interceptors.NetworkConnectionInterceptor
@@ -38,6 +40,7 @@ fun createAppModules(): Module = module {
     single { FirebaseFirestore.getInstance() }
     single<NewsRepository> { NewsRepositoryImpl(get()) }
     single<BlogFirestoreRepository> { BlogFirestoreRepositoryImpl(get()) }
+    single { BlogRoomRepositoryImpl(get<AppDatabase>().blogPostDataDao()) }
 
     factory { NewsViewModelFactory(get()) }
     factory { BlogViewModelFactory(get()) }

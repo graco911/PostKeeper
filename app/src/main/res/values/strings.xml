@@ -17,4 +17,7 @@
     <string name="entry_form_button_text">Guardar</string>
     <string name="entries_list_title_text">Entradas</string>
     <string name="todo">TODO</string>
+    <string name="chip_filter_title">Titulo</string>
+    <string name="chip_filter_author">Autor</string>
+    <string name="chip_filter_content">Contenido</string>
 </resources>

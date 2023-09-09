@@ -1,6 +1,8 @@
 package com.gracodev.postkeeper.ui.activities
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -37,6 +39,23 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             findNavController(R.id.nav_host_fragment_activity_main)
                 .navigate(R.id.action_global_entryFormFragment)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_search -> {
+                findNavController(R.id.nav_host_fragment_activity_main)
+                    .navigate(R.id.searchEntriesFragment)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

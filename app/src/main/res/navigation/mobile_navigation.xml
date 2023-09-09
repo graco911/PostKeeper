@@ -28,4 +28,13 @@
         android:name="com.gracodev.postkeeper.ui.fragments.EntryFormFragment"
         android:label="Crear entrada"
         tools:layout="@layout/fragment_entry_form" /><action android:id="@+id/action_global_entryFormFragment" app:destination="@id/entryFormFragment"/>
+    <fragment
+        android:id="@+id/searchEntriesFragment"
+        android:name="com.gracodev.postkeeper.ui.fragments.SearchEntriesFragment"
+        android:label="SearchEntriesFragment" >
+        <action
+            android:id="@+id/action_searchEntriesFragment_to_entryDetailFragment"
+            app:destination="@id/entryDetailFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_searchEntriesFragment" app:destination="@id/searchEntriesFragment" />
 </navigation>
