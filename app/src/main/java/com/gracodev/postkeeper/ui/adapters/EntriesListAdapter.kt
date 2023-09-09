@@ -20,7 +20,10 @@ class EntriesListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(EntryListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ViewHolder(
+            EntryListItemBinding
+                .inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(blogPostList[position])

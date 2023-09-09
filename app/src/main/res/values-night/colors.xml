@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="succes_color">#4CAF50</color>
     <color name="error_color">#F44336</color>
-    <color name="line_color_separator">#6C6C6C</color>
+    <color name="line_color_separator">#FFFFFF</color>
 </resources>

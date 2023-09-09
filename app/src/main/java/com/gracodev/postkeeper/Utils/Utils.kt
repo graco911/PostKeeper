@@ -1,9 +1,12 @@
 package com.gracodev.postkeeper.Utils
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.text.Editable
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -81,3 +84,27 @@ fun Context.isInternetAvailable(): Boolean {
 }
 
 fun Boolean.toVisibility() = if (this) View.GONE else View.VISIBLE
+
+fun String.formatToCustomDate(): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+    val outputFormat = SimpleDateFormat("dd/MMM/yyyy", Locale.US)
+
+    try {
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+    return this
+}
+
+fun Context.openURLWithBrowser(url: String) {
+    ContextCompat.startActivity(
+        this,
+        Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(url)
+        ), Bundle.EMPTY
+    )
+}

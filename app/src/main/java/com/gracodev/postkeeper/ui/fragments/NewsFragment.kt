@@ -1,60 +1,97 @@
 package com.gracodev.postkeeper.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gracodev.postkeeper.R
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.gracodev.postkeeper.Utils.openURLWithBrowser
+import com.gracodev.postkeeper.Utils.snackbarError
+import com.gracodev.postkeeper.data.models.Article
+import com.gracodev.postkeeper.data.models.NewsResponseData
+import com.gracodev.postkeeper.databinding.FragmentNewsBinding
+import com.gracodev.postkeeper.ui.adapters.NewsListAdapter
+import com.gracodev.postkeeper.ui.states.UIStates
+import com.gracodev.postkeeper.ui.viewmodels.NewsViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class NewsFragment : BaseFragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NewsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NewsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override var TAG: String = this.javaClass.name
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val viewModel: NewsViewModel by activityViewModel()
+
+    private val binding: FragmentNewsBinding by lazy {
+        FragmentNewsBinding.inflate(layoutInflater)
+    }
+
+    private val swipeRefreshLayout: SwipeRefreshLayout by lazy {
+        binding.swipeNewsRefreshLayout
+    }
+
+    private val newsListAdapter: NewsListAdapter by lazy {
+        NewsListAdapter() {
+            handleTap(it)
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+    ) = binding.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpNewsRequest()
+        setUpRecyclerView()
+        setUpObservable()
+        setUpSwipeToRefresh()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NewsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setUpRecyclerView() {
+        binding.apply {
+            recylerViewNewsList.adapter = newsListAdapter
+        }
+    }
+
+    private fun setUpObservable() {
+        viewModel.newsResultLiveData.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is UIStates.Error -> handleError(uiState)
+                UIStates.Loading -> dialog.show(childFragmentManager, TAG)
+                is UIStates.Success -> handleSuccess(uiState)
+                else -> {}
             }
+        }
+    }
+
+    private fun setUpSwipeToRefresh() {
+        swipeRefreshLayout.setOnRefreshListener {
+            setUpNewsRequest()
+        }
+    }
+
+    private fun setUpNewsRequest() {
+        viewModel.getNews(
+            "mx",
+            "technology",
+            "a76c92f4f36f483b8e8d629436500677"
+        )
+    }
+
+    private fun handleSuccess(success: UIStates.Success<NewsResponseData>) {
+        dialog.dismiss()
+        newsListAdapter.submitAll((success.value as NewsResponseData).articles.toMutableList())
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    private fun handleError(error: UIStates.Error) {
+        dialog.dismiss()
+        swipeRefreshLayout.isRefreshing = false
+        requireView().snackbarError(error.message)
+    }
+
+    private fun handleTap(article: Article) {
+        requireContext().openURLWithBrowser(article.url)
     }
 }
