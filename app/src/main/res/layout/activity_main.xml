@@ -19,17 +19,40 @@
         android:layout_marginBottom="@dimen/dp_16"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintEnd_toEndOf="@id/include"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@drawable/add_icon"
         android:contentDescription="@string/todo" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lNoConnection"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+    <LinearLayout
+        android:id="@+id/lNoConnection"
+        tools:visibility="visible"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/error_color"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/entries_list_title_not_connection"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

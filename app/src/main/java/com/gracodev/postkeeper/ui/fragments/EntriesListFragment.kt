@@ -9,11 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gracodev.postkeeper.R
 import com.gracodev.postkeeper.Utils.snackbarError
-import com.gracodev.postkeeper.Utils.snackbarSuccess
 import com.gracodev.postkeeper.Utils.toJson
 import com.gracodev.postkeeper.data.models.BlogPostData
 import com.gracodev.postkeeper.databinding.FragmentEntriesListBinding
-import com.gracodev.postkeeper.ui.activities.MainActivity
 import com.gracodev.postkeeper.ui.adapters.EntriesListAdapter
 import com.gracodev.postkeeper.ui.states.UIStates
 import com.gracodev.postkeeper.ui.viewmodels.BlogViewModel
@@ -40,8 +38,7 @@ class EntriesList : BaseFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ) = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,15 +48,6 @@ class EntriesList : BaseFragment() {
         setUpRecyclerView()
         setUpObservable()
         setUpSwipeToRefresh()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        showFAB()
-    }
-
-    private fun showFAB() {
-        (requireActivity() as MainActivity).revealFAB()
     }
 
     private fun setUpRecyclerView() {
@@ -92,7 +80,6 @@ class EntriesList : BaseFragment() {
         dialog.dismiss()
         entriesListAdapter.submitAll(success.value as MutableList<BlogPostData>)
         swipeRefreshLayout.isRefreshing = false
-        requireView().snackbarSuccess("Datos cargados correctamente")
     }
 
     private fun handleError(error: UIStates.Error) {

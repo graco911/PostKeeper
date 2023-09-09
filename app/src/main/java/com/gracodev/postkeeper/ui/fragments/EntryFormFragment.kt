@@ -42,7 +42,20 @@ class EntryFormFragment : BaseFragment() {
         setUpOnClickListeners()
         viewModelInitialData()
         setUpObservables()
+    }
+
+    override fun onResume() {
+        super.onResume()
         hideFAB()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        revealFAB()
+    }
+
+    private fun revealFAB() {
+        (requireActivity() as MainActivity).revealFAB()
     }
 
     private fun hideFAB() {

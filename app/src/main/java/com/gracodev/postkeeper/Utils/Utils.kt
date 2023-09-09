@@ -1,5 +1,9 @@
 package com.gracodev.postkeeper.Utils
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.text.Editable
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -63,3 +67,17 @@ fun AppCompatActivity.revealFabWithAnimation(fabId: Int, animationId: Int) {
     fab.startAnimation(hideFabAnimation)
     fab.visibility = View.VISIBLE
 }
+
+fun Context.isInternetAvailable(): Boolean {
+    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        return capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+    } else {
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
+}
+
+fun Boolean.toVisibility() = if (this) View.GONE else View.VISIBLE

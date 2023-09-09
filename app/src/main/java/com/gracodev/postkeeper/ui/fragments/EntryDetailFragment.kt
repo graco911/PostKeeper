@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.gracodev.postkeeper.Utils.fromJson
 import com.gracodev.postkeeper.Utils.toFormattedDate
 import com.gracodev.postkeeper.data.models.BlogPostData
@@ -30,11 +29,6 @@ class EntryDetailFragment : BaseFragment() {
         extractBundleInfo()
         binding.blogData = blogData
         binding.tvDate.text = blogData?.timeStamp!!.toFormattedDate()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
     private fun extractBundleInfo() {

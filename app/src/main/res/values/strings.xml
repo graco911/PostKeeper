@@ -20,4 +20,5 @@
     <string name="chip_filter_title">Titulo</string>
     <string name="chip_filter_author">Autor</string>
     <string name="chip_filter_content">Contenido</string>
+    <string name="entries_list_title_not_connection">No hay conexión a internet</string>
 </resources>

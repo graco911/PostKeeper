@@ -9,7 +9,9 @@ import com.gracodev.postkeeper.ui.states.UIStates
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class BlogViewModel(private val repository: BlogFirestoreRepository) : BaseViewModel() {
+class BlogViewModel(
+    private val repository: BlogFirestoreRepository
+) : BaseViewModel() {
 
     // LiveData para comunicar el estado de las operaciones a la interfaz de usuario
     private val _addPostResultLiveData = MutableLiveData<UIStates<Unit>>()
