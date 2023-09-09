@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="blogData"
+            type="com.gracodev.postkeeper.data.models.BlogPostData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{blogData.title}"
+            android:textSize="@dimen/entry_title_size"
+            tools:text="Titulo"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{blogData.author}"
+            tools:text="Autor"
+            android:textSize="@dimen/entry_author_size" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="2/10/1991"
+            android:textSize="@dimen/entry_date_size" />
+
+        <TextView
+            android:id="@+id/tvBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@{blogData.body}"
+            tools:text="Texto descriptivo de la entrada."
+            android:textSize="@dimen/entry_body_size" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_list">
+    <fragment
+        android:id="@+id/navigation_list"
+        android:name="com.gracodev.postkeeper.ui.fragments.EntriesList"
+        android:label="PostKeeper"
+        tools:layout="@layout/fragment_entries_list" >
+        <action
+            android:id="@+id/action_navigation_list_to_entryDetailFragment"
+            app:destination="@id/entryDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.gracodev.postkeeper.ui.fragments.NewsFragment"
+        android:label="NewsAPI"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/entryDetailFragment"
+        android:name="com.gracodev.postkeeper.ui.fragments.EntryDetailFragment"
+        android:label="Detalles de la entrada"
+        tools:layout="@layout/fragment_entry_detail" />
+    <fragment
+        android:id="@+id/entryFormFragment"
+        android:name="com.gracodev.postkeeper.ui.fragments.EntryFormFragment"
+        android:label="Crear entrada"
+        tools:layout="@layout/fragment_entry_form" /><action android:id="@+id/action_global_entryFormFragment" app:destination="@id/entryFormFragment"/>
+    <fragment
+        android:id="@+id/searchEntriesFragment"
+        android:name="com.gracodev.postkeeper.ui.fragments.SearchEntriesFragment"
+        android:label="SearchEntriesFragment" >
+        <action
+            android:id="@+id/action_searchEntriesFragment_to_entryDetailFragment"
+            app:destination="@id/entryDetailFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_searchEntriesFragment" app:destination="@id/searchEntriesFragment" />
+</navigation>
