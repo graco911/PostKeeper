@@ -21,6 +21,8 @@ Las principales características de la estructura del proyecto incluyen:
 
 El diagrama de la arquitectura muestra tanto las activities como los fragments enlazados a sus respectivos viewmodels los cuales usan los repositorios conectados a los servicios de datos tanto Firestore como NewsAPI.
 
+<img src="https://github.com/graco911/PostKeeper/assets/4141290/ed14599f-a29e-4b97-9c1f-3d34344204bb" alt="Descripción de la imagen" width="50%" height="50%" />
+
 ## Aplicacion movil
 
 PostKeeper consta de una pantalla principal con un BottomNavigationView que permite navegar entre la vista del listado de entradas y la vista de Noticias. También incluye un FloatingActionButton que muestra la pantalla para ingresar una nueva entrada y una vista para realizar búsquedas.
