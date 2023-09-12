@@ -9,12 +9,14 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.gracodev.postkeeper.R
+import com.gracodev.postkeeper.Utils.isInternetAvailable
 import com.gracodev.postkeeper.Utils.toJson
 import com.gracodev.postkeeper.data.models.BlogPostData
 import com.gracodev.postkeeper.databinding.FragmentSearchEntriesBinding
 import com.gracodev.postkeeper.ui.activities.MainActivity
 import com.gracodev.postkeeper.ui.adapters.EntriesListAdapter
 import com.gracodev.postkeeper.ui.states.UIStates
+import com.gracodev.postkeeper.ui.viewmodels.BlogRoomViewModel
 import com.gracodev.postkeeper.ui.viewmodels.BlogViewModel
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
@@ -23,6 +25,7 @@ class SearchEntriesFragment : BaseFragment() {
     override var TAG: String = this.javaClass.name
 
     private val viewModel: BlogViewModel by activityViewModel()
+    private val viewModelRoom: BlogRoomViewModel by activityViewModel()
 
     private val binding: FragmentSearchEntriesBinding by lazy {
         FragmentSearchEntriesBinding.inflate(layoutInflater)
@@ -51,8 +54,6 @@ class SearchEntriesFragment : BaseFragment() {
     }
 
     private fun setUpRecyclerView() {
-        (viewModel.getPostsResultLiveData.value as UIStates.Success).value?.size
-
         binding.apply {
             recyclerViewSearchEntries.adapter = entriesListAdapter
         }
@@ -80,7 +81,13 @@ class SearchEntriesFragment : BaseFragment() {
     }
 
     private fun filterEntries(searchText: String, selectedChips: Set<Int>) {
-        val allEntries = (viewModel.getPostsResultLiveData.value as UIStates.Success).value ?: emptyList()
+
+        val allEntries = if (requireContext().isInternetAvailable()) {
+            (viewModel.getPostsResultLiveData.value as UIStates.Success).value ?: emptyList()
+        } else {
+            (viewModelRoom.getPostsResultLiveData.value as UIStates.Success).value ?: emptyList()
+        }
+
         val filteredEntries = mutableListOf<BlogPostData>()
 
         for (entry in allEntries) {

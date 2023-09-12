@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PostKeeper</string>
+    <string name="app_center_id">915f3408-1a1d-4330-be5a-0dcce9f98f89</string>
+    <string name="news_api">https://newsapi.org/v2/</string>
+    <string name="hello_blank_fragment">Olá fragmento em branco</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Início</string>
+    <string name="title_dashboard">Painel</string>
+    <string name="title_notifications">Notificações</string>
+    <string name="title_list">Entradas</string>
+    <string name="title_news">Notícias</string>
+    <string name="entry_form_title_string">Título</string>
+    <string name="entry_form_author_title">Autor</string>
+    <string name="entry_form_body_title">Mensagem</string>
+    <string name="entry_form_button_text">Salvar</string>
+    <string name="entries_list_title_text">Entradas</string>
+    <string name="todo">A FAZER</string>
+    <string name="chip_filter_title">Título</string>
+    <string name="chip_filter_author">Autor</string>
+    <string name="chip_filter_content">Conteúdo</string>
+    <string name="entries_list_title_not_connection">Sem conexão com a internet</string>
+    <string name="news_list_title_text">Notícias</string>
+    <string name="postkeeper_db">postkeeper_db</string>
+</resources>

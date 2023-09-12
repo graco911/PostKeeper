@@ -10,9 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_8"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_8"
         android:text=""
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toStartOf="@id/tvDate"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Entrada 1" />

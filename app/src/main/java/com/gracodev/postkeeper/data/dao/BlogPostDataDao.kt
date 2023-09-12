@@ -15,12 +15,15 @@ interface BlogPostDataDao {
     @Query("SELECT * FROM blog_posts")
     suspend fun getAllBlogPosts(): List<BlogPostData>
 
-    @Query("SELECT * FROM blog_posts WHERE id = :id")
-    suspend fun getBlogPostById(id: Long): BlogPostData?
+    @Query("SELECT * FROM blog_posts WHERE roomId = :id")
+    suspend fun getBlogPostById(id: Long): BlogPostData
 
     @Update
     suspend fun update(blogPostData: BlogPostData)
 
     @Delete
-    suspend fun delete(blogPostData: BlogPostData)
+    fun delete(blogPostData: BlogPostData)
+
+    @Query("DELETE FROM blog_posts")
+    fun deleteAll()
 }
