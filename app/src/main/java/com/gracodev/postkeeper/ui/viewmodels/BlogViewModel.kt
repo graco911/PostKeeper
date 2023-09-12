@@ -31,7 +31,7 @@ class BlogViewModel(
     val enabledButton: LiveData<Boolean> get() = _enabledButton
 
     private val _blogPostData = MutableLiveData<BlogPostData>().apply {
-        value = BlogPostData("", "", 0, "")
+        value = BlogPostData(0,"", "", 0, "")
     }
     val blogPostData: LiveData<BlogPostData> = _blogPostData
 

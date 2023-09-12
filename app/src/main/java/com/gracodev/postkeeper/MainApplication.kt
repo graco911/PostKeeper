@@ -17,6 +17,7 @@ class MainApplication : Application() {
 
         FirebaseApp.initializeApp(this)
 
+
         val appModules = createAppModules()
 
         startKoin {
@@ -30,6 +31,5 @@ class MainApplication : Application() {
         )
 
         Prefs.init(this)
-
     }
 }
