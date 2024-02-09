@@ -68,7 +68,7 @@ class EntryFormFragment : BaseFragment() {
                 validateInputs()
             }
             enabledButton.observe(viewLifecycleOwner) { isEnabled ->
-                binding.btnSave.isEnabled = isEnabled
+                    binding.btnSave.isEnabled = isEnabled
             }
             addPostResultLiveData.observe(viewLifecycleOwner) { uiState ->
                 when (uiState) {
